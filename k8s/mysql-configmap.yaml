@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  namespace: petvida-k8s
+data:
+  DB_HOST: mysql-service
+  DB_NAME: 

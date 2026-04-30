@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-initdb
+  namespace: petvida-k8s
+data:
+  init.sql: |
+    CREATE TABLE IF NOT EXISTS clientes (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      nome VARCHAR(100) NOT NULL,
+      telefone VARCHAR(20) NOT NULL,
+      email VARCHAR(100) NOT NULL
+    );
+    
+    CREATE TABLE IF NOT EXISTS pets (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      nome VARCHAR(100) NOT NULL,
+      tipo VARCHAR(50) NOT NULL,
+      raca VARCHAR(50),
+      idade INT,
+      cliente_id INT,
+      FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+    );
+
+    CREATE TABLE IF NOT EXISTS servicos (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      pet_id INT,
+      tipo_servico VARCHAR(50) NOT NULL,
+      data_servico DATE NOT NULL,
+      valor DECIMAL(10,2) NOT NULL,
+      FOREIGN KEY (pet_id) REFERENCES pets(id)
+    );
+
+    CREATE TABLE IF NOT EXISTS produtos (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      nome VARCHAR(100) NOT NULL,
+      descricao TEXT,
+      preco DECIMAL(10,2) NOT NULL,
+      quantidade_estoque INT NOT NULL
+    );

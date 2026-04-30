@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flask-config
+  namespace: petvida-k8s
+data:
+  DB_HOST: mysql-service
+  DB_NAME: petvida
+  DB_USER: pet_admin
