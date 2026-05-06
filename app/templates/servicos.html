@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>PetVida - Serviços</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>✂️ Registro de Serviços</h2>
+            <a href="/" class="btn btn-outline-secondary">Voltar ao Painel</a>
+        </div>
+
+        <div class="card shadow-sm mb-5 border-warning">
+            <div class="card-body">
+                <form method="POST" class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Selecione o Pet</label>
+                        <select name="pet_id" class="form-select" required>
+                            {% for p in pets %}
+                            <option value="{{p.id}}">{{p.nome}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Tipo de Serviço</label>
+                        <input name="tipo_servico" class="form-control" placeholder="Ex: Banho e Tosa" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Data</label>
+                        <input type="date" name="data" class="form-control" required>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Valor (R$)</label>
+                        <input name="valor" class="form-control" placeholder="0.00" required>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-warning w-100">Registrar Atendimento</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped bg-white">
+                <thead class="table-warning">
+                    <tr>
+                        <th>ID Pet</th>
+                        <th>Serviço</th>
+                        <th>Data</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in servicos %}
+                    <tr>
+                        <td>{{s.pet_id}}</td>
+                        <td>{{s.tipo_servico}}</td>
+                        <td>{{s.data_servico}}</td>
+                        <td><strong>R$ {{s.valor}}</strong></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>PetVida - Produtos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>🛒 Estoque de Produtos</h2>
+            <a href="/" class="btn btn-outline-secondary">Voltar ao Painel</a>
+        </div>
+
+        <div class="card shadow-sm mb-5">
+            <div class="card-body">
+                <form method="POST" class="row g-3">
+                    <div class="col-md-4">
+                        <input name="nome" class="form-control" placeholder="Nome do Produto" required>
+                    </div>
+                    <div class="col-md-4">
+                        <input name="descricao" class="form-control" placeholder="Descrição">
+                    </div>
+                    <div class="col-md-2">
+                        <input name="preco" class="form-control" placeholder="Preço (Ex: 50.00)" required>
+                    </div>
+                    <div class="col-md-2">
+                        <input name="quantidade" type="number" class="form-control" placeholder="Qtd em Estoque" required>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-info text-white w-100">Cadastrar no Estoque</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for p in produtos %}
+            <div class="col-md-4 mb-3">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{p.nome}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">R$ {{p.preco}}</h6>
+                        <p class="card-text">{{p.descricao}}</p>
+                        <div class="d-flex justify-content-between">
+                            <span class="text-{{ 'danger' if p.quantidade_estoque|int < 5 else 'success' }}">
+                                Estoque: {{p.quantidade_estoque}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

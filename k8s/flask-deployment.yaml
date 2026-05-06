@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: petvida-flask:1.5
+        image: petvida-flask:5.0
         ports:
         - containerPort: 5000
         env:
